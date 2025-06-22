@@ -11,6 +11,8 @@ declare module "hyperswarm" {
       listener: (connection: any, peerInfo: any) => void
     ): this;
 
+    join(key: Uint8Array): void;
+
     destroy(): Promise<void>;
   }
 }
