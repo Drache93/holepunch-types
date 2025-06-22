@@ -1,21 +1,7 @@
 declare module "autobase" {
   import { EventEmitter } from "events";
   import { Buffer } from "buffer";
-
-  declare class ReadyResource extends EventEmitter {
-    private opening: Promise<void> | null;
-    private closing: Promise<void> | null;
-    private opened: boolean;
-    private closed: boolean;
-
-    constructor();
-
-    ready(): Promise<void>;
-    close(): Promise<void>;
-
-    protected _open(): Promise<void>;
-    protected _close(): Promise<void>;
-  }
+  import ReadyResource from "ready-resource";
 
   // Type definitions for Autobase dependencies
   interface Store {

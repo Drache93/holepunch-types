@@ -24,6 +24,7 @@ Once installed, the type definitions will be automatically available when you im
 import Autobase from "autobase";
 import Hyperswarm from "hyperswarm";
 import BlindPairing from "blind-pairing";
+import ReadyResource from "ready-resource";
 import * as b4a from "b4a";
 import { encode, decode } from "z32";
 
@@ -35,6 +36,7 @@ import { encode, decode } from "z32";
 - `autobase` ⚡
 - `blind-pairing` 🕶️
 - `hyperswarm` 🌐
+- `ready-resource` 🔧
 - `z32` 🔢
 - `b4a` 🧩
 
