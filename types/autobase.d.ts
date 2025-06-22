@@ -139,6 +139,9 @@ declare module "autobase" {
     readonly recoveries: number;
     readonly paused: boolean;
 
+    // Private properties
+    _interrupting: boolean;
+
     // Public getters
     get bootstrap(): Buffer | null;
     get bootstraps(): Buffer[];
