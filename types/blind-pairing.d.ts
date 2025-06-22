@@ -1,4 +1,6 @@
 declare module "blind-pairing" {
+  import ReadyResource from "ready-resource";
+
   export default class BlindPairing extends ReadyResource {
     constructor(swarm: any);
 
