@@ -6,6 +6,30 @@
 
 Welcome! This package provides TypeScript type definitions for key modules in the [Holepunch](https://holepunch.to) ecosystem, making it easier for TypeScript developers to build on top of these amazing peer-to-peer tools.
 
+## 📦 Installation
+
+```bash
+npm install holepunch-types
+# or
+yarn add holepunch-types
+# or
+bun add holepunch-types
+```
+
+## 🚀 Usage
+
+Once installed, the type definitions will be automatically available when you import the corresponding modules:
+
+```typescript
+import Autobase from "autobase";
+import Hyperswarm from "hyperswarm";
+import BlindPairing from "blind-pairing";
+import * as b4a from "b4a";
+import { encode, decode } from "z32";
+
+// TypeScript will now provide full type support for these modules
+```
+
 ## 📦 Modules Covered
 
 - `autobase` ⚡
