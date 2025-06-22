@@ -12,7 +12,7 @@ declare module "blind-pairing" {
     }): Candidate;
 
     addMember(options: {
-      announce: boolean = true;
+      announce?: boolean = true;
       discoveryKey: Uint8Array;
       onadd: (candidate: Candidate) => void | Promise<void>;
     }): Member;
