@@ -19,7 +19,8 @@
     "hyperswarm",
     "blind-pairing",
     "z32",
-    "b4a"
+    "b4a",
+    "corestore"
   ],
   "author": "Dominic Cassidy",
   "license": "MIT"

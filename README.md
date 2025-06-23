@@ -25,6 +25,7 @@ import Autobase from "autobase";
 import Hyperswarm from "hyperswarm";
 import BlindPairing from "blind-pairing";
 import ReadyResource from "ready-resource";
+import Corestore from "corestore";
 import * as b4a from "b4a";
 import { encode, decode } from "z32";
 
@@ -35,6 +36,7 @@ import { encode, decode } from "z32";
 
 - `autobase` ⚡
 - `blind-pairing` 🕶️
+- `corestore` 📦
 - `hyperswarm` 🌐
 - `ready-resource` 🔧
 - `z32` 🔢
