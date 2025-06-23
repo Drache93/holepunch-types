@@ -26,6 +26,9 @@ import Hyperswarm from "hyperswarm";
 import BlindPairing from "blind-pairing";
 import ReadyResource from "ready-resource";
 import Corestore from "corestore";
+import Hyperbee from "hyperbee";
+import Hyperblobs from "hyperblobs";
+import Hyperdrive from "hyperdrive";
 import * as b4a from "b4a";
 import { encode, decode } from "z32";
 
@@ -34,15 +37,48 @@ import { encode, decode } from "z32";
 
 ## 📦 Modules Covered
 
-- `autobase` ⚡
-- `blind-pairing` 🕶️
-- `corestore` 📦
-- `hyperswarm` 🌐
-- `ready-resource` 🔧
-- `z32` 🔢
-- `b4a` 🧩
+### Core Infrastructure
+
+- `autobase` ⚡ - Append-only log with automatic linearization
+- `blind-pairing` 🕶️ - Secure peer discovery and pairing
+- `corestore` 📦 - Hypercore factory and storage management
+- `hyperswarm` 🌐 - Distributed peer discovery and networking
+- `ready-resource` 🔧 - Resource lifecycle management
+
+### Data Storage & File Systems
+
+- `hyperbee` 🐝 - Sorted key-value store built on Hypercore
+- `hyperblobs` 💾 - Binary large object storage
+- `hyperdrive` 🚗 - P2P file system and versioning
+
+### Utilities
+
+- `z32` 🔢 - Base32 encoding/decoding
+- `b4a` 🧩 - Buffer utilities for Node.js and browsers
 
 > **Note:** This is not a conclusive list or fully tested. More modules may be added as the ecosystem grows and as usage expands.
+
+## 🔧 Type Coverage
+
+The type definitions include:
+
+- **Full API coverage** for all public methods and properties
+- **Proper inheritance** and interface implementations
+- **Event emitter support** with typed events
+- **Async iterator support** where applicable
+- **Comprehensive options interfaces** for all method parameters
+- **Stream support** for read/write operations
+- **Batch operations** with proper typing
+- **Versioning and snapshot support**
+
+## 🎯 Key Features
+
+- **Zero configuration** - Types are automatically available
+- **Complete IntelliSense** - Full autocomplete and type checking
+- **Event handling** - Properly typed event listeners and emitters
+- **Async operations** - Full support for promises and async/await
+- **Stream operations** - Typed read/write streams
+- **Batch processing** - Efficient batch operations with type safety
 
 ---
 
