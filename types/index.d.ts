@@ -7,5 +7,6 @@
 /// <reference path="./hyperblobs.d.ts" />
 /// <reference path="./hyperdrive.d.ts" />
 /// <reference path="./hyperswarm.d.ts" />
+/// <reference path="./pear-interface.d.ts" />
 /// <reference path="./ready-resource.d.ts" />
 /// <reference path="./z32.d.ts" />
