@@ -3,7 +3,7 @@ declare module "corestore" {
   import ReadyResource from "ready-resource";
 
   // Core types
-  interface Core {
+  export interface Core {
     key: Uint8Array;
     discoveryKey: Uint8Array;
     length: number;
