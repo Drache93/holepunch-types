@@ -4,6 +4,31 @@ declare module "blind-pairing" {
   export default class BlindPairing extends ReadyResource {
     constructor(swarm: any);
 
+    static createInvite(
+      key: Uint8Array,
+      opts?: {
+        discoveryKey?: Uint8Array;
+        expires?: number;
+        seed?: Uint8Array;
+        sensitive?: boolean;
+        data?: Uint8Array;
+        testInvitation?: boolean;
+      }
+    ): {
+      id: Uint8Array;
+      invite: Uint8Array;
+      seed: Uint8Array;
+      publicKey: Uint8Array;
+      additional: {
+        data: Uint8Array;
+        signature: Uint8Array;
+      } | null;
+      discoveryKey: Uint8Array;
+      expires: number;
+      sensitive: boolean;
+      testInvitation: boolean;
+    };
+
     addCandidate(options: {
       invite: Uint8Array;
       userData: Uint8Array;
