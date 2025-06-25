@@ -35,6 +35,101 @@ import { encode, decode } from "z32";
 // TypeScript will now provide full type support for these modules
 ```
 
+## 🍐 Using with Pear
+
+Get started quickly with TypeScript support in your Pear project:
+
+### 1. Initialize a new Pear project
+
+```bash
+pear init --yes --type terminal
+```
+
+### 2. Convert to TypeScript
+
+```bash
+mv index.js index.ts
+```
+
+### 3. Install dependencies
+
+```bash
+bun install
+```
+
+### 4. Add type definitions
+
+```bash
+bun add github:Drache93/holepunch-types#v0.1.9
+```
+
+### 5. You now have full TypeScript support! 🎉
+
+### 6. Example: Build a P2P chat app
+
+Install some of the supported libraries and start building:
+
+```bash
+bun add hyperswarm hyperbee
+```
+
+```typescript
+// index.ts
+import Hyperswarm from "hyperswarm";
+import Hyperbee from "hyperbee";
+import * as b4a from "b4a";
+
+// Full TypeScript support with autocomplete!
+const swarm = new Hyperswarm({
+  keyPair: crypto.keyPair(), // Properly typed
+  maxPeers: 10,
+});
+
+const bee = new Hyperbee(core, {
+  keyEncoding: "utf-8",
+  valueEncoding: "utf-8",
+});
+
+swarm.on("connection", (connection, peerInfo) => {
+  // Both connection and peerInfo are fully typed
+  console.log("Connected to peer:", b4a.toString(peerInfo.publicKey, "hex"));
+});
+
+await swarm.join(b4a.from("chat-room", "utf-8"));
+```
+
+### 7. Build and run your app
+
+Build your TypeScript project:
+
+```bash
+bun build index.ts --outdir . --packages=external
+```
+
+Then run it like a normal(TM) Pear app!:
+
+```bash
+pear run -d .
+```
+
+### 8. Easy development workflow
+
+Update your `package.json` dev script for easy development:
+
+```json
+{
+  "scripts": {
+    "dev": "bun build index.ts --outdir . --packages=external && pear run -d ."
+  }
+}
+```
+
+Then simply run:
+
+```bash
+bun run dev
+```
+
 ## 📦 Modules Covered
 
 ### Core Infrastructure
