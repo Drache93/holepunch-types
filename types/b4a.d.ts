@@ -1,5 +1,23 @@
 declare module "b4a" {
-  export function from(input: string | Uint8Array | ArrayBuffer): Uint8Array;
+  type BufferEncoding =
+    | "ascii"
+    | "utf8"
+    | "utf-8"
+    | "utf16le"
+    | "utf-16le"
+    | "ucs2"
+    | "ucs-2"
+    | "base64"
+    | "base64url"
+    | "latin1"
+    | "binary"
+    | "hex";
+
+  export function from(
+    input: string | Uint8Array | ArrayBuffer,
+    bufferOrOffset?: number | BufferEncoding,
+    length?: number
+  ): Uint8Array;
   export function alloc(size: number): Uint8Array;
   export function allocUnsafe(size: number): Uint8Array;
   export function allocUnsafeSlow(size: number): Uint8Array;
