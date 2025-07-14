@@ -50,7 +50,7 @@ declare module "pear-interface" {
     updates(handler: (update: any) => void): Readable;
     wakeups(handler: (wakeup: any) => void): Readable;
     teardown(fn: () => void): Promise<void>;
-    exit(code?: number): void;
+    exit(code?: number): never;
   }
 
   export interface GuiCtrl {
