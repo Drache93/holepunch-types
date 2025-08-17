@@ -40,6 +40,7 @@ expectType<Promise<{ length: number; byteLength: number }>>(
 );
 
 expectError(core.append(123));
+expectError(core.append({ n: "nope" }));
 
 // ---------------------------------------------------------------------------
 // get()
@@ -48,6 +49,8 @@ expectError(core.append(123));
 expectType<Promise<{ n: number }>>(core.get(0));
 expectType<Promise<string>>(core.get(0, { valueEncoding: "utf-8" }));
 expectError(core.get<number>(0, { valueEncoding: "utf-8" }));
+expectType<Promise<Buffer>>(core.get(0, { valueEncoding: "binary" }));
+expectType<Promise<{ n: number }>>(core.get(0, { valueEncoding: "json" }));
 
 // ---------------------------------------------------------------------------
 // has()
