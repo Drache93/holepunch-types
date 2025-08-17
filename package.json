@@ -2,13 +2,13 @@
   "name": "holepunch-types",
   "version": "0.2.0",
   "description": "TypeScript type definitions for Holepunch ecosystem modules: autobase, blind-pairing, hyperswarm, z32, b4a, and more.",
-  "types": "types/index.d.ts",
+  "types": "@types/index.d.ts",
   "files": [
-    "types/**/*.d.ts"
+    "@types/**/*.d.ts"
   ],
   "exports": {
     ".": {
-      "types": "./types/index.d.ts"
+      "types": "./@types/index.d.ts"
     }
   },
   "repository": {
@@ -34,8 +34,28 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test:runtime": "node test/runtime.test.js"
   },
+  "tsd": {
+    "directory": "test",
+    "compilerOptions": {
+      "strict": true,
+      "target": "ES2020",
+      "lib": [
+        "ES2020"
+      ],
+      "types": [
+        "node"
+      ],
+      "typeRoots": [
+        "./@types"
+      ]
+    }
+  },
   "devDependencies": {
+    "hypercore": "^11.13.0",
     "tsd": "^0.33.0",
     "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@types/node": "^24.3.0"
   }
 }

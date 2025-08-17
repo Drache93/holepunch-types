@@ -5,6 +5,7 @@
 /// <reference path="./corestore.d.ts" />
 /// <reference path="./hyperbee.d.ts" />
 /// <reference path="./hyperblobs.d.ts" />
+/// <reference path="./hypercore.d.ts" />
 /// <reference path="./hyperdrive.d.ts" />
 /// <reference path="./hyperswarm.d.ts" />
 /// <reference path="./pear-interface.d.ts" />
