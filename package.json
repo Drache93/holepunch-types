@@ -51,6 +51,7 @@
     }
   },
   "devDependencies": {
+    "brittle": "^3.18.0",
     "hypercore": "^11.13.0",
     "tsd": "^0.33.0",
     "typescript": "^5.9.2"
