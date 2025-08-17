@@ -1,15 +1,17 @@
 /// <reference types="node" />
 
-export type ValueEncoding<T> =
-  | "binary"
-  | "utf-8"
-  | "json"
-  | {
-      preencode?(s: any, v: T): void;
-      encode(s: any, v: T): void;
-      decode(s: any): T;
-    };
+// ------------------ Encodings ------------------
+export type BuiltInValueEncoding = "binary" | "utf-8" | "json";
 
+export type CustomValueEncoding<T> = {
+  preencode?(s: any, v: T): void;
+  encode(s: any, v: T): void;
+  decode(s: any): T;
+};
+
+export type ValueEncoding<T> = BuiltInValueEncoding | CustomValueEncoding<T>;
+
+// ------------------ Options ------------------
 export interface HypercoreOptions<T = unknown> {
   valueEncoding?: ValueEncoding<T>;
   createIfMissing?: boolean;
@@ -27,47 +29,18 @@ export interface HypercoreOptions<T = unknown> {
   encryption?: { key: Buffer };
 }
 
-export interface GetOptions<T = unknown> {
+type GetBase = {
   wait?: boolean;
   onwait?: () => void;
   timeout?: number;
-  valueEncoding?: ValueEncoding<T>;
   decrypt?: boolean;
-}
+};
 
-export interface UpdateOptions {
-  wait?: boolean;
-}
-export interface SeekOptions {
-  wait?: boolean;
-  timeout?: number;
-}
-export interface ReadStreamOptions {
-  start?: number;
-  end?: number;
-  live?: boolean;
-  snapshot?: boolean;
-}
-export interface ByteStreamOptions {
-  byteOffset?: number;
-  byteLength?: number;
-  prefetch?: number;
-}
-export interface ClearOptions {
-  diff?: boolean;
-}
-export interface DownloadRangeSpec {
-  start?: number;
-  end?: number;
-  blocks?: number[];
-  linear?: boolean;
-}
+// If you want to keep exporting GetOptions<T>, make it the *base*
+// (no valueEncoding here)
+export type GetOptions<T = unknown> = GetBase;
 
-export interface DownloadRange {
-  done(): Promise<void>;
-  destroy(): void;
-}
-
+// ------------------ Info ------------------
 export interface InfoStorageBreakdown {
   oplog: number;
   tree: number;
@@ -88,6 +61,7 @@ export interface InfoOptions {
   storage?: boolean;
 }
 
+// ------------------ Class ------------------
 declare class Hypercore<T = unknown> {
   readonly key: Buffer | null;
   readonly discoveryKey: Buffer;
@@ -115,23 +89,63 @@ declare class Hypercore<T = unknown> {
         >
   ): Promise<{ length: number; byteLength: number }>;
 
-  get<I = T>(index: number, options?: GetOptions<I>): Promise<I>;
-  has(start: number, end?: number): Promise<boolean>;
-  update(options?: UpdateOptions): Promise<boolean>;
-  seek(byteOffset: number, options?: SeekOptions): Promise<[number, number]>;
+  // -------- get() overloads --------
+  // 1) No override -> return T (uses core default)
+  get(index: number, options?: GetBase): Promise<T>;
 
-  createReadStream(options?: ReadStreamOptions): AsyncIterable<any>;
-  createByteStream(options?: ByteStreamOptions): AsyncIterable<Uint8Array>;
+  // 2) Built-ins: precise, non-generic
+  get(
+    index: number,
+    options: GetBase & { valueEncoding: "binary" }
+  ): Promise<Buffer>;
+  get(
+    index: number,
+    options: GetBase & { valueEncoding: "utf-8" }
+  ): Promise<string>;
+  get(index: number, options: GetBase & { valueEncoding: "json" }): Promise<T>;
+
+  // 3) Custom encoding object: generic
+  get<I>(
+    index: number,
+    options: GetBase & { valueEncoding: CustomValueEncoding<I> }
+  ): Promise<I>;
+
+  has(start: number, end?: number): Promise<boolean>;
+  update(options?: { wait?: boolean }): Promise<boolean>;
+  seek(
+    byteOffset: number,
+    options?: { wait?: boolean; timeout?: number }
+  ): Promise<[number, number]>;
+
+  createReadStream(options?: {
+    start?: number;
+    end?: number;
+    live?: boolean;
+    snapshot?: boolean;
+  }): AsyncIterable<any>;
+  createByteStream(options?: {
+    byteOffset?: number;
+    byteLength?: number;
+    prefetch?: number;
+  }): AsyncIterable<Uint8Array>;
 
   clear(
     start: number,
     end?: number,
-    options?: ClearOptions
+    options?: { diff?: boolean }
   ): Promise<Uint8Array | null>;
   truncate(newLength: number, forkId?: number): Promise<void>;
   treeHash(length?: number): Promise<Buffer>;
 
-  download(range?: DownloadRangeSpec): DownloadRange;
+  download(range?: {
+    start?: number;
+    end?: number;
+    blocks?: number[];
+    linear?: boolean;
+  }): {
+    done(): Promise<void>;
+    destroy(): void;
+  };
 
   session(options?: {
     weak?: boolean;
@@ -147,6 +161,7 @@ declare class Hypercore<T = unknown> {
   snapshot(): Hypercore<T>;
 
   info(options?: InfoOptions): Promise<Info>;
+
   setUserData(key: string, value: string | Buffer): Promise<void>;
   getUserData(key: string): string | Buffer | undefined;
 
