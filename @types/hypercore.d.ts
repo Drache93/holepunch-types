@@ -62,6 +62,9 @@ declare module "hypercore" {
     storage?: boolean;
   }
 
+  // ------------------ Function Return Types ------------------
+  export type ClearReturn = Uint8Array | null | undefined;
+
   // ------------------ Class ------------------
   class Hypercore<T = unknown> {
     readonly key: Buffer | null;
@@ -137,7 +140,7 @@ declare module "hypercore" {
       start: number,
       end?: number,
       options?: { diff?: boolean }
-    ): Promise<Uint8Array | null>;
+    ): Promise<ClearReturn>;
     truncate(newLength: number, forkId?: number): Promise<void>;
     treeHash(length?: number): Promise<Buffer>;
 

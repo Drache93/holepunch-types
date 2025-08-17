@@ -4,10 +4,8 @@ import Hypercore, {
   type HypercoreOptions,
   type Info,
   type InfoOptions,
+  type ClearReturn,
 } from "hypercore";
-
-// If your tsd env doesn't include Node types, add this line OR set "types": ["node"] in tsd.config.json
-// import type { Buffer } from 'node:buffer';
 
 // ---------------------------------------------------------------------------
 // Constructor
@@ -83,8 +81,8 @@ expectType<AsyncIterable<Uint8Array>>(core.createByteStream());
 // clear()
 // ---------------------------------------------------------------------------
 
-expectType<Promise<Uint8Array | null>>(core.clear(0, 10));
-expectType<Promise<Uint8Array | null>>(core.clear(0, 10, { diff: true }));
+expectType<Promise<ClearReturn>>(core.clear(0, 10));
+expectType<Promise<ClearReturn>>(core.clear(0, 10, { diff: true }));
 
 // ---------------------------------------------------------------------------
 // truncate()

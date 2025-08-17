@@ -12,8 +12,12 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "types": ["node"],
-    "typeRoots": ["./@types"]
+    "typeRoots": ["./@types"],
+    "baseUrl": ".",
+    "paths": {
+      "hypercore": ["@types/hypercore/index.d.ts"] // <— hard bind during edit
+    }
   },
-  "include": ["@types/**/*.d.ts", "test/**/*.d.ts"],
+  "include": ["@types/**/*.d.ts", "test/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
