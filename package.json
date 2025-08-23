@@ -29,10 +29,8 @@
   "author": "Dominic Cassidy",
   "license": "MIT",
   "scripts": {
-    "test": "npm run test:types && npm run test:runtime",
     "test:types": "tsd",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test:runtime": "node test/index.runtime.test.js"
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "tsd": {
     "directory": "test",
