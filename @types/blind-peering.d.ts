@@ -1,5 +1,8 @@
 declare module "blind-peering" {
-  export interface BlindPeeringOptions {
+  import Corestore from "corestore";
+  import Hyperswarm from "hyperswarm";
+
+  interface BlindPeeringOptions {
     mirrors?: string[];
     wakeup?: any; // TODO
   }

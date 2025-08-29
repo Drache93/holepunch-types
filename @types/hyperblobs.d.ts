@@ -100,7 +100,7 @@ declare module "hyperblobs" {
   }
 
   // Main Hyperblobs class
-  declare class Hyperblobs extends EventEmitter {
+  class Hyperblobs extends EventEmitter {
     constructor(core: Hypercore, opts?: HyperblobsOptions);
 
     // Properties

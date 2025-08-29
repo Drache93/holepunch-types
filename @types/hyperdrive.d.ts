@@ -97,7 +97,7 @@ declare module "hyperdrive" {
     end: number;
   }
 
-  declare class Download extends EventEmitter {
+  class Download extends EventEmitter {
     constructor(drives: Hyperdrive[], folder?: string, options?: any);
     constructor(downloads: Promise<void>[]);
 
@@ -105,14 +105,14 @@ declare module "hyperdrive" {
     close(): Promise<void>;
   }
 
-  declare class Monitor extends EventEmitter {
+  class Monitor extends EventEmitter {
     constructor(drive: Hyperdrive, options: MonitorOptions);
 
     ready(): Promise<void>;
     close(): Promise<void>;
   }
 
-  declare class Hyperdrive extends ReadyResource {
+  class Hyperdrive extends ReadyResource {
     constructor(
       corestore: Corestore,
       key?: Uint8Array | HyperdriveOptions,

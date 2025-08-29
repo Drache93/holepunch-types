@@ -220,7 +220,7 @@ declare module "hyperbee" {
   }
 
   // Main Hyperbee class
-  declare class Hyperbee extends ReadyResource {
+  class Hyperbee extends ReadyResource {
     constructor(core: Hypercore, opts?: HyperbeeOptions);
 
     // Static methods

@@ -118,7 +118,3 @@ declare module "pear-interface" {
     PearView: new () => PearView;
   }
 }
-
-declare global {
-  var Pear: import("pear-interface").PearGUI;
-}
