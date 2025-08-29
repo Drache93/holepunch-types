@@ -1,5 +1,4 @@
 declare module "hyperbee" {
-  import { EventEmitter } from "events";
   import ReadyResource from "ready-resource";
   import Hypercore from "hypercore";
   import { Readable } from "streamx";
@@ -40,9 +39,9 @@ declare module "hyperbee" {
     extension?: any;
     metadata?: any;
     lock?: any;
-    sep?: Buffer;
+    sep?: Uint8Array;
     readonly?: boolean;
-    prefix?: Buffer | null;
+    prefix?: Uint8Array | null;
     alwaysDuplicate?: boolean;
     checkout?: number;
     sessions?: boolean;
@@ -101,7 +100,7 @@ declare module "hyperbee" {
   interface SubOptions {
     keyEncoding?: any;
     valueEncoding?: any;
-    sep?: Buffer | string;
+    sep?: Uint8Array | string;
   }
 
   interface WatchOptions {
@@ -235,9 +234,9 @@ declare module "hyperbee" {
     readonly extension: any;
     readonly metadata: any;
     readonly lock: any;
-    readonly sep: Buffer;
+    readonly sep: Uint8Array;
     readonly readonly: boolean;
-    readonly prefix: Buffer | null;
+    readonly prefix: Uint8Array | null;
     readonly alwaysDuplicate: boolean;
     readonly version: number;
     readonly id: string;
@@ -271,7 +270,7 @@ declare module "hyperbee" {
     createDiffStream(
       right: Hyperbee | number,
       range: any,
-      opts?: DiffStreamOptions
+      opts?: DiffStreamOptions,
     ): Readable;
 
     // Versioning
@@ -279,7 +278,7 @@ declare module "hyperbee" {
     snapshot(opts?: CheckoutOptions): Hyperbee;
 
     // Sub databases
-    sub(prefix: Buffer | string, opts?: SubOptions): Hyperbee;
+    sub(prefix: Uint8Array | string, opts?: SubOptions): Hyperbee;
 
     // Watching
     watch(range: any, opts?: WatchOptions): Watcher;

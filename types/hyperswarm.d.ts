@@ -1,5 +1,5 @@
 declare module "hyperswarm" {
-  import { EventEmitter } from "events";
+  import ReadyResource from "ready-resource";
 
   interface KeyPair {
     publicKey: Uint8Array;
@@ -98,7 +98,7 @@ declare module "hyperswarm" {
     };
   }
 
-  export default class Hyperswarm extends EventEmitter {
+  export default class Hyperswarm extends ReadyResource {
     keyPair: KeyPair;
     dht: any;
     server: any;

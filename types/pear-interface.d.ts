@@ -3,7 +3,7 @@ declare module "pear-interface" {
   import { Pipe } from "bare-pipe";
 
   export interface PearConfig {
-    key: Buffer | null;
+    key: Uint8Array | null;
     alias: string | null;
     checkpoint: string | null;
     links: string[];
@@ -24,8 +24,11 @@ declare module "pear-interface" {
   }
 
   export interface PearIdentity {
-    request(publicKey: Buffer): Promise<Buffer>;
-    share(params: { publicKey: Buffer; attestation: Buffer }): Promise<void>;
+    request(publicKey: Uint8Array): Promise<Uint8Array>;
+    share(params: {
+      publicKey: Uint8Array;
+      attestation: Uint8Array;
+    }): Promise<void>;
     clear(): Promise<void>;
   }
 
@@ -41,7 +44,7 @@ declare module "pear-interface" {
     message(message: string): Promise<void>;
     messages(
       handler: ((message: any) => void) | Record<string, any>,
-      options?: (message: any) => void
+      options?: (message: any) => void,
     ): Readable;
     checkpoint(state: Record<string, any>): Promise<void>;
     versions(): Promise<{ app: string; platform: string }>;

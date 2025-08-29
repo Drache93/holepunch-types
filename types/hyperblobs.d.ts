@@ -89,12 +89,12 @@ declare module "hyperblobs" {
   // Batch interface
   interface HyperBlobsBatch {
     blobs: Hyperblobs;
-    blocks: Buffer[];
+    blocks: Uint8Array[];
     bytes: number;
 
     ready(): Promise<void>;
-    put(buffer: Buffer): Promise<PutResult>;
-    get(id: BlobId): Promise<Buffer | null>;
+    put(buffer: Uint8Array): Promise<PutResult>;
+    get(id: BlobId): Promise<Uint8Array | null>;
     flush(): Promise<void>;
     close(): void;
   }
@@ -123,7 +123,7 @@ declare module "hyperblobs" {
 
     // Blob operations
     put(blob: Buffer | Uint8Array | string, opts?: PutOptions): Promise<BlobId>;
-    get(id: BlobId, opts?: GetOptions): Promise<Buffer | null>;
+    get(id: BlobId, opts?: GetOptions): Promise<Uint8Array | null>;
     clear(id: BlobId, opts?: ClearOptions): Promise<any>;
 
     // Stream operations
@@ -141,11 +141,11 @@ declare module "hyperblobs" {
     on(event: "peer-remove", listener: (peer: any) => void): this;
     on(
       event: "upload",
-      listener: (index: number, bytes: number, from: any) => void
+      listener: (index: number, bytes: number, from: any) => void,
     ): this;
     on(
       event: "download",
-      listener: (index: number, bytes: number, from: any) => void
+      listener: (index: number, bytes: number, from: any) => void,
     ): this;
     on(event: string, listener: (...args: any[]) => void): this;
 

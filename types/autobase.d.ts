@@ -1,6 +1,4 @@
 declare module "autobase" {
-  import { EventEmitter } from "events";
-  import { Buffer } from "buffer";
   import ReadyResource from "ready-resource";
 
   // Type definitions for Autobase dependencies
@@ -15,18 +13,18 @@ declare module "autobase" {
   }
 
   interface KeyPair {
-    publicKey: Buffer;
-    secretKey: Buffer;
+    publicKey: Uint8Array;
+    secretKey: Uint8Array;
   }
 
   interface WakeupProtocol {
     addStream(stream: any): void;
-    session(cap: Buffer, handler: any): any;
+    session(cap: Uint8Array, handler: any): any;
     destroy(): void;
   }
 
   interface FastForwardConfig {
-    key: Buffer;
+    key: Uint8Array;
     verified?: boolean;
     force?: boolean;
     minimum?: number;
@@ -36,7 +34,7 @@ declare module "autobase" {
     valueEncoding?: string;
     encrypted?: boolean;
     encrypt?: boolean;
-    encryptionKey?: Buffer;
+    encryptionKey?: Uint8Array;
     nukeTip?: boolean;
     wakeup?: WakeupProtocol;
     fastForward?: FastForwardConfig | false;
@@ -44,8 +42,8 @@ declare module "autobase" {
     ackThreshold?: number;
     keyPair?: Promise<KeyPair> | KeyPair;
     wakeupCapability?:
-      | Promise<{ key: Buffer; discoveryKey: Buffer }>
-      | { key: Buffer; discoveryKey: Buffer };
+      | Promise<{ key: Uint8Array; discoveryKey: Uint8Array }>
+      | { key: Uint8Array; discoveryKey: Uint8Array };
     wait?: () => Promise<void>;
     open?: (store: any, base: any) => any;
     apply?: (nodes: any[], view: any, base: any) => Promise<void>;
@@ -55,12 +53,12 @@ declare module "autobase" {
   }
 
   interface WakeupHint {
-    key: Buffer;
+    key: Uint8Array;
     length: number;
   }
 
   interface Node {
-    key: Buffer;
+    key: Uint8Array;
     length: number;
   }
 
@@ -93,20 +91,20 @@ declare module "autobase" {
   interface Core {
     ready(): Promise<void>;
     close(): Promise<void>;
-    key: Buffer;
+    key: Uint8Array;
   }
 
   declare class Autobase extends ReadyResource {
     constructor(
       store: Store,
-      bootstrap?: Buffer | string | null,
-      handlers?: AutobaseHandlers
+      bootstrap?: Uint8Array | string | null,
+      handlers?: AutobaseHandlers,
     );
 
     // Public properties
-    readonly id: Buffer | null;
-    readonly key: Buffer | null;
-    readonly discoveryKey: Buffer | null;
+    readonly id: Uint8Array | null;
+    readonly key: Uint8Array | null;
+    readonly discoveryKey: Uint8Array | null;
     readonly keyPair: KeyPair | null;
     readonly valueEncoding: any;
     readonly store: Store;
@@ -114,7 +112,7 @@ declare module "autobase" {
     readonly migrated: boolean;
     readonly encrypted: boolean;
     readonly encrypt: boolean;
-    readonly encryptionKey: Buffer | null;
+    readonly encryptionKey: Uint8Array | null;
     readonly encryption: any | null;
     readonly local: any | null;
     readonly localWriter: any | null;
@@ -124,7 +122,10 @@ declare module "autobase" {
     readonly updating: boolean;
     readonly nukeTip: boolean;
     readonly wakeupOwner: boolean;
-    readonly wakeupCapability: { key: Buffer; discoveryKey: Buffer } | null;
+    readonly wakeupCapability: {
+      key: Uint8Array;
+      discoveryKey: Uint8Array;
+    } | null;
     readonly wakeupProtocol: WakeupProtocol;
     readonly wakeupSession: any | null;
     readonly fastForwardEnabled: boolean;
@@ -143,8 +144,8 @@ declare module "autobase" {
     _interrupting: boolean;
 
     // Public getters
-    get bootstrap(): Buffer | null;
-    get bootstraps(): Buffer[];
+    get bootstrap(): Uint8Array | null;
+    get bootstraps(): Uint8Array[];
     get writable(): boolean;
     get ackable(): boolean;
     get signedLength(): number;
@@ -157,8 +158,8 @@ declare module "autobase" {
     replicate(isInitiator: boolean, opts?: any): any;
     heads(): Node[];
     hintWakeup(hints: WakeupHint | WakeupHint[]): void;
-    setLocal(key?: Buffer, options?: { keyPair?: KeyPair }): Promise<void>;
-    setWakeup(cap: Buffer, discoveryKey?: Buffer): void;
+    setLocal(key?: Uint8Array, options?: { keyPair?: KeyPair }): Promise<void>;
+    setWakeup(cap: Uint8Array, discoveryKey?: Uint8Array): void;
     flush(): Promise<void>;
     advance(): Promise<void>;
     recouple(): void;
@@ -172,10 +173,10 @@ declare module "autobase" {
     pause(): void;
     resume(): void;
     waitForWritable(): Promise<boolean>;
-    removeable(key: Buffer): boolean;
+    removeable(key: Uint8Array): boolean;
 
     // Deprecated methods (still public)
-    getSystemKey(): Buffer;
+    getSystemKey(): Uint8Array;
     getIndexedInfo(): Promise<any>;
 
     // Static methods
@@ -183,12 +184,12 @@ declare module "autobase" {
     static encodeValue(value: any, opts?: any): any;
     static getLocalKey(
       store: Store,
-      opts?: GetLocalKeyOptions
-    ): Promise<Buffer>;
+      opts?: GetLocalKeyOptions,
+    ): Promise<Uint8Array>;
     static getLocalCore(store: Store): Core;
     static getUserData(core: any): Promise<GetUserDataResult>;
     static isAutobase(core: any, opts?: IsAutobaseOptions): Promise<boolean>;
-    static getBootRecord(store: Store, key: Buffer): Promise<any>;
+    static getBootRecord(store: Store, key: Uint8Array): Promise<any>;
 
     // Events
     on(event: "update", listener: () => void): this;
@@ -199,7 +200,7 @@ declare module "autobase" {
     on(event: "interrupt", listener: (reason: any) => void): this;
     on(
       event: "fast-forward",
-      listener: (to: number, from: number) => void
+      listener: (to: number, from: number) => void,
     ): this;
     on(event: "reboot", listener: () => void): this;
     on(event: "warning", listener: (err: Error) => void): this;

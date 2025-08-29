@@ -1,5 +1,5 @@
 declare module "hyperdrive" {
-  import { EventEmitter } from "events";
+  import { EventEmitter } from "events"; // TODO: replace
   import ReadyResource from "ready-resource";
   import Corestore from "corestore";
   import Hypercore from "hypercore";
@@ -116,7 +116,7 @@ declare module "hyperdrive" {
     constructor(
       corestore: Corestore,
       key?: Uint8Array | HyperdriveOptions,
-      opts?: HyperdriveOptions
+      opts?: HyperdriveOptions,
     );
 
     // Static methods
@@ -149,17 +149,17 @@ declare module "hyperdrive" {
     flush(): Promise<void>;
 
     // File operations
-    get(name: string, opts?: ReadStreamOptions): Promise<Buffer | null>;
-    put(name: string, buf: Buffer, opts?: PutOptions): Promise<void>;
+    get(name: string, opts?: ReadStreamOptions): Promise<Uint8Array | null>;
+    put(name: string, buf: Uint8Array, opts?: PutOptions): Promise<void>;
     del(name: string): Promise<void>;
     symlink(
       name: string,
       dst: string,
-      opts?: { metadata?: any }
+      opts?: { metadata?: any },
     ): Promise<void>;
     entry(
       name: string,
-      opts?: EntryOptions
+      opts?: EntryOptions,
     ): Promise<{ key: string; value: FileEntry } | null>;
     exists(name: string): Promise<boolean>;
     has(path: string): Promise<boolean>;
@@ -194,11 +194,11 @@ declare module "hyperdrive" {
     downloadDiff(
       length: number,
       folder?: string,
-      opts?: any
+      opts?: any,
     ): Promise<Download>;
     downloadRange(
       dbRanges: DownloadRange[],
-      blobRanges: DownloadRange[]
+      blobRanges: DownloadRange[],
     ): Promise<Download>;
     download(folder?: string, opts?: any): Download;
 
