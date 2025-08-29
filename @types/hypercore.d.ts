@@ -159,7 +159,10 @@ declare module "hypercore" {
 
     // Data manipulation
     /** Append a block to the core */
-    append(block: any, options?: PutOptions): Promise<{length: number, byteLength: number}>;
+    append(
+      block: any,
+      options?: PutOptions,
+    ): Promise<{ length: number; byteLength: number }>;
     /** Get a block by index */
     get<T>(index: number, options?: GetOptions): Promise<T>;
     /** Check if blocks exist in the given range */

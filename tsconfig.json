@@ -6,17 +6,18 @@
     "declaration": true,
     "declarationMap": true,
     "outDir": "./dist",
-    "rootDir": "./types",
+    "rootDir": "@types",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node"],
+    "typeRoots": ["./@types"],
+    "baseUrl": ".",
+    "paths": {
+      "hypercore": ["@types/hypercore/index.d.ts"] // <— hard bind during edit
+    }
   },
-  "include": [
-    "types/**/*.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
-} 
+  "include": ["@types/**/*.d.ts", "test/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
