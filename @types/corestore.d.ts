@@ -1,17 +1,7 @@
 declare module "corestore" {
   import ReadyResource from "ready-resource";
-  import Hyperbee from "hyperbee";
+  import Hypercore from "hypercore";
   import { Connection } from "hyperswarm";
-
-  interface GetOptions {
-    wait?: boolean;
-    timeout?: number;
-    valueEncoding?: string;
-  }
-
-  interface PutOptions {
-    valueEncoding?: string;
-  }
 
   interface ReplicateOptions {
     live?: boolean;
@@ -24,18 +14,6 @@ declare module "corestore" {
       remotePublicKey: Uint8Array,
       cb: (err: Error | null, allowed: boolean) => void,
     ) => void;
-  }
-
-  interface ReadStreamOptions {
-    start?: number;
-    end?: number;
-    live?: boolean;
-    snapshot?: boolean;
-    valueEncoding?: string;
-  }
-
-  interface WriteStreamOptions {
-    valueEncoding?: string;
   }
 
   interface KeyPair {
@@ -70,7 +48,7 @@ declare module "corestore" {
     ) => void;
   }
 
-  declare class Corestore extends ReadyResource {
+  class Corestore extends ReadyResource {
     constructor(storage: any, options?: CorestoreOptions);
 
     // Core management

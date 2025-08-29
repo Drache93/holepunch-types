@@ -116,7 +116,7 @@ declare module "hypercore" {
     };
   }
 
-  declare class Hypercore extends ReadyResource {
+  class Hypercore extends ReadyResource {
     // Properties
     /** Can we read from this core? */
     readonly readable: boolean;
