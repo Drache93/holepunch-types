@@ -6,11 +6,6 @@
   "files": [
     "@types/**/*.d.ts"
   ],
-  "exports": {
-    ".": {
-      "types": "./@types/index.d.ts"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Drache93/holepunch-types"
@@ -55,6 +50,7 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@types/node": "^24.3.0"
+    "@types/node": "^24.3.0",
+    "git-remote-punch": "git://0200002dd1e5bc519d005e0ca74b9e3a0719549371cb9547f6672c69aba0d5b3cfc56f0570756e636800/punch"
   }
 }
